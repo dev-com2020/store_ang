@@ -1,18 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { TableComponent } from './core/table.component';
+import { FormComponent } from './core/form.component';
+import { registerLocaleData } from '@angular/common';
+import localePL from '@angular/common/locales/pl'
+import { ModelModule } from './model/model.module';
+import { CoreModule } from './core/core.module';
 
-import { AppComponent } from './app.component';
-import { StaticDataSource } from './model/static.datasource';
-import { Model } from './model/repository.model';
+registerLocaleData(localePL);
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  
   imports: [
-    BrowserModule
+    BrowserModule,
+    ModelModule,
+    CoreModule,
   ],
-  providers: [Model,StaticDataSource],
-  bootstrap: [AppComponent]
+  
+  bootstrap: [TableComponent, FormComponent]
 })
 export class AppModule { }
