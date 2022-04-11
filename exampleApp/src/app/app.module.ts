@@ -6,6 +6,8 @@ import { registerLocaleData } from '@angular/common';
 import localePL from '@angular/common/locales/pl'
 import { ModelModule } from './model/model.module';
 import { CoreModule } from './core/core.module';
+import { MessageModule } from './messages/message.module';
+import { MessageComponent } from './messages/message.component';
 
 registerLocaleData(localePL);
 
@@ -15,8 +17,9 @@ registerLocaleData(localePL);
     BrowserModule,
     ModelModule,
     CoreModule,
+    MessageModule
   ],
   
-  bootstrap: [TableComponent, FormComponent]
+  bootstrap: [TableComponent, FormComponent, MessageComponent]
 })
 export class AppModule { }
