@@ -28,6 +28,7 @@ export class FormComponent {
                 let name = activeRoute.snapshot.params["name"];
                 let category = activeRoute.snapshot.params["category"];
                 let price = activeRoute.snapshot.params["price"];
+                
                 if (name !=null && category !=null && price !=null){
                   this.product.id = id;
                   this.product.name = name;
