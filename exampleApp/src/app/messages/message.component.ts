@@ -6,10 +6,10 @@ import { Message } from "./message.model";
 @Component({
     selector: "paMessages",
     templateUrl: "message.component.html",
-    })
-    export class MessageComponent {
+})
+export class MessageComponent {
     lastMessage: Message;
     constructor(messageService: MessageService) {
-    messageService.registerMessageHandler(m => this.lastMessage = m);
+        messageService.messages.subscribe(m => this.lastMessage = m);
     }
-    }
+}
