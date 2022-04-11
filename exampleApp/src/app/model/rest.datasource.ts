@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Inject, Injectable, InjectionToken } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 import { Product } from "./product.model";
 
 
@@ -36,7 +37,8 @@ export class RestDataSource {
             body: body,
             headers: myHeaders
             
-        });
+        }).pipe(catchError((error: Response) =>
+        throwError(`Błąd sieci: ${error.statusText} (${error.status})`)));
     }
 
 }
