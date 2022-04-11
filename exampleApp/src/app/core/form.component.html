@@ -1,6 +1,6 @@
 <div class="bg-primary text-white p-2" [class.bg-warning]="editing">
     <h5>{{editing ? "Edycja" : "Dodawanie"}} produktu</h5>
-    Ostatnie zdarzenie: {{ stateEvents | async | formatState}}
+    <!-- Ostatnie zdarzenie: {{ stateEvents | async | formatState}} -->
 </div>
 
 <form novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()">
@@ -22,5 +22,5 @@
     <button type="submit" class="btn btn-primary m-1" [class.btn-warning]="editing" [disabled]="form.invalid">
         {{editing ? "Zapisz" : "Dodaj"}}
     </button>
-    <button type="reset" class="btn btn-secondary m-1">Anuluj</button>
+    <button type="reset" class="btn btn-secondary m-1" routerLink="/">Anuluj</button>
 </form>

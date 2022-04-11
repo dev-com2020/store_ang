@@ -5,6 +5,8 @@ import { Product } from '../model/product.model';
 import { Model } from '../model/repository.model';
 import { MODES, SharedState, SHARED_STATE } from './sharedState.model';
 import { distinctUntilChanged, skipWhile } from 'rxjs/operators'
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 
@@ -19,21 +21,23 @@ export class FormComponent {
   product: Product = new Product();
   // lastId: number;
 
-  constructor(private model: Model,
-              @Inject(SHARED_STATE) public stateEvents: Observable<SharedState>){
-                stateEvents
-                // .pipe(skipWhile(state => state.mode == MODES.EDIT))
-                // .pipe(distinctUntilChanged((firstState, secondState) => 
-                // firstState.mode == secondState.mode 
-                // && firstState.id == secondState.id))
-                .subscribe(update => {
-                  this.product = new Product();
-                  if (update.id != undefined){
-                    Object.assign(this.product, this.model.getProduct(update.id));
-                  }
-                  this.editing = update.mode == MODES.EDIT;
-                });
-              }    
+  constructor(private model: Model, activeRoute: ActivatedRoute, private router: Router){
+    this.editing = activeRoute.snapshot.params["mode"] == "edit";
+              let id  = activeRoute.snapshot.params["id"];
+              if (id != null){
+                let name = activeRoute.snapshot.params["name"];
+                let category = activeRoute.snapshot.params["category"];
+                let price = activeRoute.snapshot.params["price"];
+                if (name !=null && category !=null && price !=null){
+                  this.product.id = id;
+                  this.product.name = name;
+                  this.product.category = category;
+                  this.product.price = Number.parseFloat(price);
+                }else{
+                Object.assign(this.product, model.getProduct(id) || new Product());
+              }
+            }    
+          }
   
 editing: boolean = false;
     
@@ -41,8 +45,9 @@ editing: boolean = false;
   submitForm(form: NgForm){
     if (form.valid){
       this.model.saveProduct(this.product);
-      this.product = new Product();
-      form.reset();
+      // this.product = new Product();
+      // form.reset();
+      this.router.navigateByUrl("/");
     }
   }
 
