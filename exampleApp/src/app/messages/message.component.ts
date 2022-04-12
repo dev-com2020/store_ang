@@ -9,6 +9,7 @@ import { Message } from "./message.model";
 })
 export class MessageComponent {
     lastMessage: Message;
+    
     constructor(messageService: MessageService) {
         messageService.messages.subscribe(m => this.lastMessage = m);
     }

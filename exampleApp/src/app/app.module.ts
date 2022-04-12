@@ -10,6 +10,7 @@ import { MessageModule } from './messages/message.module';
 import { MessageComponent } from './messages/message.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+import { TermsGuard } from './terms.guard';
 
 registerLocaleData(localePL);
 
@@ -23,7 +24,8 @@ registerLocaleData(localePL);
     routing
   ],
   declarations:[AppComponent],
-  
+  providers: [TermsGuard],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
