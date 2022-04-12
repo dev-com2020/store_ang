@@ -15,6 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class FormComponent {
 
   product: Product = new Product();
+  originalProduct = new Product();
   // lastId: number;
 
   constructor(public model: Model, activeRoute: ActivatedRoute, private router: Router){
@@ -22,7 +23,8 @@ export class FormComponent {
       this.editing = params["mode"] == "edit";
       let id  = params["id"];
       if (id != null){
-        Object.assign(this.product, model.getProduct(id) || new Product());    
+        Object.assign(this.product, model.getProduct(id) || new Product());
+        Object.assign(this.originalProduct, this.product);
   
   
     // this.editing = activeRoute.snapshot.params["mode"] == "edit";
@@ -51,13 +53,14 @@ editing: boolean = false;
       this.model.saveProduct(this.product);
       // this.product = new Product();
       // form.reset();
+      this.originalProduct = this.product;
       this.router.navigateByUrl("/");
     }
   }
 
-  resetForm(){
-    this.product = new Product();
-  }  
+  // resetForm(){
+  //   this.product = new Product();
+  // }  
 
   // ngDoCheck() {
   //   if (this.lastId != this.state.id){

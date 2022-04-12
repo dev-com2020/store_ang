@@ -11,6 +11,7 @@ import { MessageComponent } from './messages/message.component';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { TermsGuard } from './terms.guard';
+import { OndemandComponent } from './ondemand/ondemand.component';
 
 registerLocaleData(localePL);
 

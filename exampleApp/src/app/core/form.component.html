@@ -13,7 +13,7 @@ Następny</button>
 </div>
 
 
-<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)" (reset)="resetForm()">
+<form novalidate #form="ngForm" (ngSubmit)="submitForm(form)">
     <div class="form-group">
         <label>Produkt</label>
         <input class="form-control" name="name" [(ngModel)]="product.name" required />
@@ -32,5 +32,5 @@ Następny</button>
     <button type="submit" class="btn btn-primary m-1" [class.btn-warning]="editing" [disabled]="form.invalid">
         {{editing ? "Zapisz" : "Dodaj"}}
     </button>
-    <button type="reset" class="btn btn-secondary m-1" routerLink="/">Anuluj</button>
+    <button type="button" class="btn btn-secondary m-1" routerLink="/">Anuluj</button>
 </form>
