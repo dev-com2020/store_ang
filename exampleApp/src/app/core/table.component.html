@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
     <div class="row">
         <div class="col-auto">
             <button class="btn btn-secondary btn-block" routerLink="/table" routerLinkActive="bg-primary"
@@ -13,9 +13,16 @@
         <div class="col">
             <button class="btn btn-info mx-1" routerLink="products">Liczba produktów</button>
             <button class="btn btn-primary mx-1" routerLink="categories">Liczba kategorii</button>
-            <!-- <button class="btn btn-secondary mx-1" routerLink="/table">Liczba hmmm...</button> -->
-            <div class="my-2"><router-outlet></router-outlet></div>
-            
+            <button class="btn btn-secondary mx-1" routerLink="/table">Liczba hmmm...</button>
+            <div class="my-2"><router-outlet></router-outlet></div> -->
+
+
+<div class="form-group bg-info text-white p-2">
+    <label>Kategoria</label>
+    <select [(ngModel)]="highlightCategory" class="form-control">
+        <option value="">Brak</option>
+        <option *ngFor="let category of categories">{{ category }}</option></select>
+</div>            
             <table class="table table-sm table-bordered table-striped">
                 <tr>
                     <th>ID</th>
@@ -24,7 +31,8 @@
                     <th>Cena</th>
                     <th></th>
                 </tr>
-                <tr *ngFor="let item of getProducts()">
+                <tr *ngFor="let item of getProducts()"
+                        [@rowHighlight]="getRowState(item.category)">
                     <td>{{item.id}}</td>
                     <td>{{item.name}}</td>
                     <td>{{item.category}}</td>
@@ -40,18 +48,18 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        <!-- </div>
     </div>
-</div>
+</div> -->
 <div class="p-2 text-center">
     <button class="btn btn-primary m-1" routerLink="/form/create">
         Dodaj nowy produkt
     </button>
-    <button class="btn btn-danger m-1" routerLink="/nie/istnieje">
+    <!-- <button class="btn btn-danger m-1" routerLink="/nie/istnieje">
         Generuj błąd routingu
     </button>
     <button class="btn btn-danger" routerLink="/ondemand">
         Wczytaj moduł
     </button>
-    
+     -->
 </div>

@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { TermsGuard } from './terms.guard';
 import { OndemandComponent } from './ondemand/ondemand.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoadGuard } from './load.guard';
 
 registerLocaleData(localePL);
@@ -23,7 +24,8 @@ registerLocaleData(localePL);
     ModelModule,
     CoreModule,
     MessageModule,
-    routing
+    routing,
+    BrowserAnimationsModule
   ],
   declarations: [AppComponent],
   providers: [TermsGuard, LoadGuard],

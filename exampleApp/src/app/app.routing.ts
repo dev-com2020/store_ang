@@ -11,32 +11,30 @@ import { TermsGuard } from "./terms.guard";
 
 
 
-const childRoutes: Routes = [
-    {
-        canActivateChild: [TermsGuard],
-        path: "",
-        children: [{ path: "products", component: ProductCountComponent },
-        { path: "categories", component: CategoryCountComponent },
-        { path: "", component: ProductCountComponent }],
-        resolve: { model: ModelResolver }
-    }
-];
+// const childRoutes: Routes = [
+//     {
+//         canActivateChild: [TermsGuard],
+//         path: "",
+//         children: [{ path: "products", component: ProductCountComponent },
+//         { path: "categories", component: CategoryCountComponent },
+//         { path: "", component: ProductCountComponent }],
+//         resolve: { model: ModelResolver }
+//     }
+// ];
 
 const routes: Routes = [
-    {path: "ondemand",
-    loadChildren:() => import("./ondemand/ondemand.module").then(m => m.OndemandModule),
-    canLoad: [LoadGuard]
-    },
+    // {path: "ondemand",
+    // loadChildren:() => import("./ondemand/ondemand.module").then(m => m.OndemandModule),
+    // canLoad: [LoadGuard]
+    // },
 
-    { path: "form/:mode", component: FormComponent, resolve: { model: ModelResolver },
-      canActivate: [TermsGuard] 
+    { path: "form/:mode", component: FormComponent, canActivate: [TermsGuard] 
     },
-    { path: "form/:mode/:id", component: FormComponent, resolve: { model: ModelResolver },
-    canDeactivate: [UnsavedGuard] 
+    { path: "form/:mode/:id", component: FormComponent, canDeactivate: [UnsavedGuard] 
     },
     // { path: "nie", redirectTo: "form/create", pathMatch: "prefix" },
-    { path: "table", component: TableComponent, children: childRoutes },
-    { path: "table/:category", component: TableComponent, children: childRoutes },
+    { path: "table", component: TableComponent},
+    { path: "table/:category", component: TableComponent},
     // { path: "table", component: TableComponent },
     { path: "", redirectTo: "/table", pathMatch: "full" },
     { path: "**", component: NotFoundComponent }
