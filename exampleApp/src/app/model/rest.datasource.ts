@@ -38,7 +38,7 @@ export class RestDataSource {
             headers: myHeaders
             
         })
-        .pipe(delay(5000))
+        // .pipe(delay(5000))
         .pipe(catchError((error: Response) =>
         throwError(`Błąd sieci: ${error.statusText} (${error.status})`)));
     }

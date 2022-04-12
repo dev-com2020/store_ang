@@ -12,11 +12,12 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { TermsGuard } from './terms.guard';
 import { OndemandComponent } from './ondemand/ondemand.component';
+import { LoadGuard } from './load.guard';
 
 registerLocaleData(localePL);
 
 @NgModule({
-  
+
   imports: [
     BrowserModule,
     ModelModule,
@@ -24,8 +25,8 @@ registerLocaleData(localePL);
     MessageModule,
     routing
   ],
-  declarations:[AppComponent],
-  providers: [TermsGuard],
+  declarations: [AppComponent],
+  providers: [TermsGuard, LoadGuard],
 
   bootstrap: [AppComponent]
 })

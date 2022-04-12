@@ -5,6 +5,7 @@ import { NotFoundComponent } from "./core/notFound.component";
 import { ProductCountComponent } from "./core/productCount.component";
 import { TableComponent } from "./core/table.component";
 import { UnsavedGuard } from "./core/unsaved.guard";
+import { LoadGuard } from "./load.guard";
 import { ModelResolver } from "./model/model.resolver";
 import { TermsGuard } from "./terms.guard";
 
@@ -23,7 +24,9 @@ const childRoutes: Routes = [
 
 const routes: Routes = [
     {path: "ondemand",
-    loadChildren:() => import("./ondemand/ondemand.module").then(m => m.OndemandModule)},
+    loadChildren:() => import("./ondemand/ondemand.module").then(m => m.OndemandModule),
+    canLoad: [LoadGuard]
+    },
 
     { path: "form/:mode", component: FormComponent, resolve: { model: ModelResolver },
       canActivate: [TermsGuard] 
