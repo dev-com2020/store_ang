@@ -1,28 +1,52 @@
-<table class="table table-sm table-bordered table-striped">
-    <tr>
-        <th>ID</th>
-        <th>Produkt</th>
-        <th>Kategoria</th>
-        <th>Cena</th>
-        <th></th>
-    </tr>
-    <tr *ngFor="let item of getProducts()">
-        <td>{{item.id}}</td>
-        <td>{{item.name}}</td>
-        <td>{{item.category}}</td>
-        <td>{{item.price | currency:"PLN":"symbol":undefined:"pl-PL" }}</td>
-        <td class="text-center">
-            <button class="btn btn-danger btn-sm mr-1" (click)="deleteProduct(item.id)">
-                Usuń
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-auto">
+            <button class="btn btn-secondary btn-block" routerLink="/table" routerLinkActive="bg-primary"
+                [routerLinkActiveOptions]="{exact:true}">
+                Wszystkie
             </button>
-            <button class="btn btn-warning btn-sm" 
-                [routerLink]="['/form','edit', item.id,
+            <button *ngFor="let category of categories" class="btn btn-secondary btn-block px-3"
+                [routerLink]="['/table', category]" routerLinkActive="bg-primary">
+                {{ category }}
+            </button>
+        </div>
+        <div class="col">
+            <button class="btn btn-info mx-1" routerLink="products">Liczba produktów</button>
+            <button class="btn btn-primary mx-1" routerLink="categories">Liczba kategorii</button>
+            <!-- <button class="btn btn-secondary mx-1" routerLink="/table">Liczba hmmm...</button> -->
+            <div class="my-2"><router-outlet></router-outlet></div>
+            <table class="table table-sm table-bordered table-striped">
+                <tr>
+                    <th>ID</th>
+                    <th>Produkt</th>
+                    <th>Kategoria</th>
+                    <th>Cena</th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let item of getProducts()">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.category}}</td>
+                    <td>{{item.price | currency:"PLN":"symbol":undefined:"pl-PL" }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-danger btn-sm mr-1" (click)="deleteProduct(item.id)">
+                            Usuń
+                        </button>
+                        <button class="btn btn-warning btn-sm" [routerLink]="['/form','edit', item.id,
                 {name: item.name, category: item.category, price: item.price}]">
-            Edytuj
-</button>
-        </td>
-    </tr>
-</table>
-<button class="btn btn-primary m-1" routerLink="/form/create">
-    Dodaj nowy produkt
-</button>
+                            Edytuj
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="p-2 text-center">
+    <button class="btn btn-primary m-1" routerLink="/form/create">
+        Dodaj nowy produkt
+    </button>
+    <button class="btn btn-danger m-1" routerLink="/nie/istnieje">
+        Generuj błąd routingu
+    </button>
+</div>
