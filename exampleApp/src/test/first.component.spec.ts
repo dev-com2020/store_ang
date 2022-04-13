@@ -10,6 +10,7 @@ describe("FirstComponent",()=> {
     let component: FirstComponent;
     let debugElement: DebugElement;
     let spanElement: HTMLSpanElement;
+    let divElement: HTMLDivElement;
 
     let mockRepository = {
         getProducts: function () {
@@ -33,27 +34,36 @@ describe("FirstComponent",()=> {
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         spanElement = debugElement.query(By.css("span")).nativeElement;
+        divElement = debugElement.children[0].nativeElement;
         });
+    });
+
+    it("Obsluga zdarzeń myszy",()=>{
+        expect(component.highlighted).toBeFalsy();
+        expect(divElement.classList.contains("bg-success")).toBeFalsy();
+        debugElement.triggerEventHandler("mouseenter",new Event("mouseenter"));
+        fixture.detectChanges();
+    });
     });
 
     // it("Sprawdzanie, czy komponent jest zdefiniowany", () => {
     //     expect(component).toBeDefined()
-    it("Filtrowanie kategorii",()=>{
+    // it("Filtrowanie kategorii",()=>{
 
-        component.category = "Szachy"
-        fixture.detectChanges();
-        expect(component.getProducts().length).toBe(1);
-        expect(spanElement.textContent).toContain("1");
+    //     component.category = "Szachy"
+    //     fixture.detectChanges();
+    //     expect(component.getProducts().length).toBe(1);
+    //     expect(spanElement.textContent).toContain("1");
 
-        component.category = "Piłka nożna"
-        fixture.detectChanges();
-        expect(component.getProducts().length).toBe(2);
-        expect(spanElement.textContent).toContain("2");
+    //     component.category = "Piłka nożna"
+    //     fixture.detectChanges();
+    //     expect(component.getProducts().length).toBe(2);
+    //     expect(spanElement.textContent).toContain("2");
         
-        component.category = "Kursy"
-        fixture.detectChanges();
-        expect(component.getProducts().length).toBe(0);
-        expect(spanElement.textContent).toContain("0");
+    //     component.category = "Kursy"
+    //     fixture.detectChanges();
+    //     expect(component.getProducts().length).toBe(0);
+    //     expect(spanElement.textContent).toContain("0");
 
-        });
+    //     });
     });
