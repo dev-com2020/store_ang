@@ -1,5 +1,5 @@
 import { DebugElement } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { ComponentFixture, TestBed, async } from "@angular/core/testing"
 import { Product } from "src/app/model/product.model";
 import { Model } from "src/app/model/repository.model";
 import { FirstComponent } from "src/app/ondemand/first.component"
@@ -21,19 +21,21 @@ describe("FirstComponent",()=> {
         }
     }
 
-    beforeEach(() =>{
+    beforeEach(async() =>{
         TestBed.configureTestingModule({
             declarations: [FirstComponent],
             providers:[
                 {provide: Model, useValue: mockRepository}
             ]
         });
+        TestBed.compileComponents().then(() => {
         fixture = TestBed.createComponent(FirstComponent);
         component = fixture.componentInstance;
         debugElement = fixture.debugElement;
         spanElement = debugElement.query(By.css("span")).nativeElement;
+        });
     });
-    
+
     // it("Sprawdzanie, czy komponent jest zdefiniowany", () => {
     //     expect(component).toBeDefined()
     it("Filtrowanie kategorii",()=>{
