@@ -23,10 +23,10 @@ import { TermsGuard } from "./terms.guard";
 // ];
 
 const routes: Routes = [
-    // {path: "ondemand",
-    // loadChildren:() => import("./ondemand/ondemand.module").then(m => m.OndemandModule),
+    {path: "ondemand",
+    loadChildren:() => import("./ondemand/ondemand.module").then(m => m.OndemandModule),
     // canLoad: [LoadGuard]
-    // },
+    },
 
     { path: "form/:mode", component: FormComponent, canActivate: [TermsGuard] 
     },
